@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace WebBanHangOnline.Models.EF
 {
     [Table("tb_Posts")]
-    public class Posts:CommonAbstract
+    public class Posts : CommonAbstract
     {
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -17,11 +17,14 @@ namespace WebBanHangOnline.Models.EF
         [Required]
         [StringLength(150)]
         public string Title { get; set; }
+
         [StringLength(150)]
         public string Alias { get; set; }
         public string Description { get; set; }
+
         [AllowHtml]
         public string Detail { get; set; }
+
         [StringLength(250)]
         public string Image { get; set; }
         public int CategoryId { get; set; }

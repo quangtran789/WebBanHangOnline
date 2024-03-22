@@ -186,7 +186,7 @@ namespace WebBanHangOnline.Controllers
 
         [HttpPost]
         public ActionResult Update(int id, int quantity)
-        {
+        { 
             ShoppingCart cart = (ShoppingCart)Session["Cart"];
             if (cart != null)
             {

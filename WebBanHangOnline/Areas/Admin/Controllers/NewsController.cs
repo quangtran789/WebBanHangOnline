@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using PagedList;
+
 using System.Web.Mvc;
 using WebBanHangOnline.Models;
 using WebBanHangOnline.Models.EF;
@@ -47,7 +47,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                 model.Alias = WebBanHangOnline.Models.Common.Filter.FilterChar(model.Title);
                 db.News.Attach(model);
                 db.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                _ = db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(model);

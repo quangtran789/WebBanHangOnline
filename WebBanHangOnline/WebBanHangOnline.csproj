@@ -180,20 +180,23 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdvController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Decorator\LoggingOrderControllerDecorator.cs" />
+    <Compile Include="Areas\Admin\Controllers\Factory\IProductCategoryFactory.cs" />
+    <Compile Include="Areas\Admin\Controllers\Factory\ProductCategoryFactory.cs" />
     <Compile Include="Areas\Admin\Controllers\Iterator\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\Facade\PostFacade.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\Iterator\ilterator.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Facade\PostFacadeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Decorator\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductImageController.cs" />
-    <Compile Include="Areas\Admin\Controllers\Prototype\CloneProduct.cs" />
-    <Compile Include="Areas\Admin\Controllers\Prototype\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Proxy\ProductCategoryProxy.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SettingSystemController.cs" />
     <Compile Include="Areas\Admin\Controllers\Singleton\CategorySingleton.cs" />
     <Compile Include="Areas\Admin\Controllers\StatisticalController.cs" />
     <Compile Include="Common\Common.cs" />
@@ -211,6 +214,22 @@
     <Compile Include="Migrations\202403031659046_CreateDatabase.cs" />
     <Compile Include="Migrations\202403031659046_CreateDatabase.Designer.cs">
       <DependentUpon>202403031659046_CreateDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403211823013_[Tên_Migration].cs" />
+    <Compile Include="Migrations\202403211823013_[Tên_Migration].Designer.cs">
+      <DependentUpon>202403211823013_[Tên_Migration].cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403211825084_UP.cs" />
+    <Compile Include="Migrations\202403211825084_UP.Designer.cs">
+      <DependentUpon>202403211825084_UP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403211827009_dwd.cs" />
+    <Compile Include="Migrations\202403211827009_dwd.Designer.cs">
+      <DependentUpon>202403211827009_dwd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403211844363_dwk.cs" />
+    <Compile Include="Migrations\202403211844363_dwk.Designer.cs">
+      <DependentUpon>202403211844363_dwk.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -236,6 +255,7 @@
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Models\ViewModels\RevenueStatisticViewModel.cs" />
     <Compile Include="Models\ThongKeViewModel.cs" />
+    <Compile Include="Models\ViewModels\SettingSystemViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -3326,6 +3346,8 @@
     <Content Include="Areas\Admin\Views\Order\View.cshtml" />
     <Content Include="Areas\Admin\Views\Order\Partial_SanPham.cshtml" />
     <Content Include="Areas\Admin\Views\Statistical\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SettingSystem\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SettingSystem\Partial_Setting.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -3396,13 +3418,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\Factory\" />
+    <Folder Include="Areas\Admin\Controllers\Prototype\" />
     <Folder Include="Areas\Admin\Views\Adv\" />
     <Folder Include="Areas\Admin\Views\CategoryIterator\" />
     <Folder Include="Areas\Admin\Views\Contact\" />
     <Folder Include="Areas\Admin\Views\ViewPost\" />
     <Folder Include="Content\ckfinder\userfiles\" />
-    <Folder Include="Controllers\Bridge\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -3420,6 +3441,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202403031659046_CreateDatabase.resx">
       <DependentUpon>202403031659046_CreateDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403211823013_[Tên_Migration].resx">
+      <DependentUpon>202403211823013_[Tên_Migration].cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403211825084_UP.resx">
+      <DependentUpon>202403211825084_UP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403211827009_dwd.resx">
+      <DependentUpon>202403211827009_dwd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403211844363_dwk.resx">
+      <DependentUpon>202403211844363_dwk.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

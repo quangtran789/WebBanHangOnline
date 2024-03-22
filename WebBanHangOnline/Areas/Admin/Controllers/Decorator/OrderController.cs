@@ -1,26 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using WebBanHangOnline.Models;
 using PagedList;
 using System.Globalization;
-using System.Data.Entity;
 using WebBanHangOnline.Models.ViewModels;
+using WebBanHangOnline.Models;
+using System.Linq;
+using System.Data.Entity;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
-    
+    // Base class or Component
     public class OrderController : Controller
     {
+        protected ApplicationDbContext db = new ApplicationDbContext();
 
-        private ApplicationDbContext db = new ApplicationDbContext();
-        // GET: Admin/Order
-        public ActionResult Index(int? page)
+        public virtual ActionResult Index(int? page)
         {
             var items = db.Orders.OrderByDescending(x => x.CreatedDate).ToList();
-
             if (page == null)
             {
                 page = 1;
@@ -32,22 +28,20 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             return View(items.ToPagedList(pageNumber, pageSize));
         }
 
-
-
-        public ActionResult View(int id)
+        public virtual ActionResult View(int id)
         {
             var item = db.Orders.Find(id);
             return View(item);
         }
 
-        public ActionResult Partial_SanPham(int id)
+        public virtual ActionResult Partial_SanPham(int id)
         {
             var items = db.OrderDetails.Where(x => x.OrderId == id).ToList();
             return PartialView(items);
         }
 
         [HttpPost]
-        public ActionResult UpdateTT(int id, int trangthai)
+        public virtual ActionResult UpdateTT(int id, int trangthai)
         {
             var item = db.Orders.Find(id);
             if (item != null)
@@ -61,12 +55,11 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             return Json(new { message = "Unsuccess", Success = false });
         }
 
-        public void ThongKe(string fromDate, string toDate)
+        public virtual void ThongKe(string fromDate, string toDate)
         {
             var query = from o in db.Orders
                         join od in db.OrderDetails on o.Id equals od.OrderId
-                        join p in db.Products
-on od.ProductId equals p.Id
+                        join p in db.Products on od.ProductId equals p.Id
                         select new
                         {
                             CreatedDate = o.CreatedDate,
@@ -87,8 +80,8 @@ on od.ProductId equals p.Id
             var result = query.GroupBy(x => DbFunctions.TruncateTime(x.CreatedDate)).Select(r => new
             {
                 Date = r.Key.Value,
-                TotalBuy = r.Sum(x => x.OriginalPrice * x.Quantity), // tổng giá bán
-                TotalSell = r.Sum(x => x.Price * x.Quantity) // tổng giá mua
+                TotalBuy = r.Sum(x => x.OriginalPrice * x.Quantity),
+                TotalSell = r.Sum(x => x.Price * x.Quantity)
             }).Select(x => new RevenueStatisticViewModel
             {
                 Date = x.Date,
