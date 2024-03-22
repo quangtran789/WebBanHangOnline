@@ -12,7 +12,13 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
    
     public class ProductsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db;
+
+        public ProductsController()
+        {
+            db = new ApplicationDbContext();
+        }
+
         // GET: Admin/Products
         public ActionResult Index(int? page)
         {

@@ -53,5 +53,10 @@ namespace WebBanHangOnline.Models.EF
         public virtual ProductCategory ProductCategory { get; set; }
         public virtual ICollection <ProductImage> ProductImage { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public Product Clone()
+        {
+            // Tạo một bản sao của đối tượng Product
+            return (Product)this.MemberwiseClone();
+        }
     }
 }
