@@ -14,6 +14,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
 
     public class AccountController : Controller
     {
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationDbContext db = new ApplicationDbContext();

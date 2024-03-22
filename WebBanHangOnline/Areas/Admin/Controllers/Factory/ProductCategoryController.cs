@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebBanHangOnline.Areas.Admin.Controllers.Factory;
 using WebBanHangOnline.Models;
 using WebBanHangOnline.Models.EF;
 
@@ -10,7 +12,15 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
 {
     public class ProductCategoryController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db;
+        private readonly IProductCategoryFactory productCategoryFactory;
+
+        public ProductCategoryController()
+        {
+            db = new ApplicationDbContext();
+            productCategoryFactory = new ProductCategoryFactory();
+        }
+
         // GET: Admin/ProductCategory
         public ActionResult Index()
         {
@@ -38,6 +48,7 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             }
             return View();
         }
+
         public ActionResult Edit(int id)
         {
             var item = db.ProductCategories.Find(id);
@@ -53,11 +64,12 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
                 model.ModifierDate = DateTime.Now;
                 model.Alias = WebBanHangOnline.Models.Common.Filter.FilterChar(model.Title);
                 db.ProductCategories.Attach(model);
-                db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+                db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View();
         }
     }
+
 }

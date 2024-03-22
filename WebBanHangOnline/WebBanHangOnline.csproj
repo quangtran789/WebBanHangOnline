@@ -191,11 +191,10 @@
     <Compile Include="Areas\Admin\Controllers\Facade\PostFacadeController.cs" />
     <Compile Include="Areas\Admin\Controllers\Decorator\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Factory\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductImageController.cs" />
     <Compile Include="Areas\Admin\Controllers\Prototype\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Prototype\IProductPrototype.cs" />
-    <Compile Include="Areas\Admin\Controllers\Proxy\ProductCategoryProxy.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingSystemController.cs" />
     <Compile Include="Areas\Admin\Controllers\Singleton\CategorySingleton.cs" />
@@ -3419,6 +3418,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Controllers\Proxy\" />
     <Folder Include="Areas\Admin\Views\Adv\" />
     <Folder Include="Areas\Admin\Views\CategoryIterator\" />
     <Folder Include="Areas\Admin\Views\Contact\" />
