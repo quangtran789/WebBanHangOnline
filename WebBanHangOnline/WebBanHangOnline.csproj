@@ -231,6 +231,14 @@
     <Compile Include="Migrations\202403211844363_dwk.Designer.cs">
       <DependentUpon>202403211844363_dwk.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202403230828330_df.cs" />
+    <Compile Include="Migrations\202403230828330_df.Designer.cs">
+      <DependentUpon>202403230828330_df.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403230831435_de.cs" />
+    <Compile Include="Migrations\202403230831435_de.Designer.cs">
+      <DependentUpon>202403230831435_de.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Common\Filter.cs" />
@@ -3453,6 +3461,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202403211844363_dwk.resx">
       <DependentUpon>202403211844363_dwk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403230828330_df.resx">
+      <DependentUpon>202403230828330_df.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403230831435_de.resx">
+      <DependentUpon>202403230831435_de.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

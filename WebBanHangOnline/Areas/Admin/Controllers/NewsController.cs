@@ -1,7 +1,6 @@
 ﻿using PagedList;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 
@@ -40,29 +39,19 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(News model)
         {
-            model.CreatedDate = DateTime.Now;
-            model.CategoryId = 3;
-            model.ModifierDate = DateTime.Now;
-            model.Alias = WebBanHangOnline.Models.Common.Filter.FilterChar(model.Title);
             if (ModelState.IsValid)
             {
-                try
-                {
-                    db.News.Add(model); // Thêm đối tượng vào context
-                    db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
-
-                }
-                catch (Exception ex)
-                {
-                    // Xử lý lỗi ở đây
-                    Console.WriteLine(ex.ToString()); // In ra lỗi cụ thể để xem
-                }
-
-
+                model.CreatedDate = DateTime.Now;
+                model.CategoryId = 3;
+                model.ModifierDate = DateTime.Now;
+                model.Alias = WebBanHangOnline.Models.Common.Filter.FilterChar(model.Title);
+                db.News.Attach(model);
+                db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+                _ = db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(model);
         }
-
 
         public ActionResult Edit(int id)
         {

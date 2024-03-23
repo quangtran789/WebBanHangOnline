@@ -24,9 +24,9 @@ namespace WebBanHangOnline.Models.EF
         [Required(ErrorMessage = "Số điện thoại không để trống")]
         public string Phone { get; set; }
         [Required(ErrorMessage = "Địa chỉ khổng để trống")]
-        
+
        
-        
+
         public string Address { get; set; }
         public decimal TotalAmount { get; set; }
         public int Quantity { get; set; }
