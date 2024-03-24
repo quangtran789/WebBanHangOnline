@@ -64,7 +64,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -183,17 +189,19 @@
     <Compile Include="Areas\Admin\Controllers\Decorator\LoggingOrderControllerDecorator.cs" />
     <Compile Include="Areas\Admin\Controllers\Factory\IProductCategoryFactory.cs" />
     <Compile Include="Areas\Admin\Controllers\Factory\ProductCategoryFactory.cs" />
+    <Compile Include="Areas\Admin\Controllers\Commard\ICommand.cs" />
     <Compile Include="Areas\Admin\Controllers\Iterator\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\Facade\PostFacade.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\Iterator\ilterator.cs" />
-    <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Builder\NewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Facade\PostFacadeController.cs" />
     <Compile Include="Areas\Admin\Controllers\Decorator\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Builder\NewsQueryBuilder.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Factory\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductImageController.cs" />
-    <Compile Include="Areas\Admin\Controllers\Prototype\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\Prototype\IProductPrototype.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingSystemController.cs" />
@@ -202,10 +210,12 @@
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\SettingHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Global.asax.cs">
@@ -238,6 +248,10 @@
     <Compile Include="Migrations\202403230831435_de.cs" />
     <Compile Include="Migrations\202403230831435_de.Designer.cs">
       <DependentUpon>202403230831435_de.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202403231719156_InitialCreated.cs" />
+    <Compile Include="Migrations\202403231719156_InitialCreated.Designer.cs">
+      <DependentUpon>202403231719156_InitialCreated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -3423,10 +3437,13 @@
     <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
     <Content Include="Views\ShoppingCart\Partial_CheckOut.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOutSuccess.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\Detail.cshtml" />
+    <Content Include="Views\News\Partial_News_Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\Proxy\" />
     <Folder Include="Areas\Admin\Views\Adv\" />
     <Folder Include="Areas\Admin\Views\CategoryIterator\" />
     <Folder Include="Areas\Admin\Views\Contact\" />
@@ -3467,6 +3484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202403230831435_de.resx">
       <DependentUpon>202403230831435_de.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202403231719156_InitialCreated.resx">
+      <DependentUpon>202403231719156_InitialCreated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,9 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity.EntityFramework
 @model IEnumerable<IdentityRole>
 @{
-    ViewBag.Title = "Danh sách Quyền";
+    ViewBag.Title = "Danh Sách Quyền";
 }
-
 @section naviheader{
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -11,32 +10,33 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin" class="nav-link">Trang chủ</a>
+            <a href="/admin/home" class="nav-link">Trang Chủ</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="/admin/category" class="nav-link">@ViewBag.Title</a>
+            <a href="/admin/role" class="nav-link">@ViewBag.Title</a>
         </li>
     </ul>
 }
+
 <!-- Main content -->
 <section class="content">
 
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Danh sách Quyền</h3>
+            <h3 class="card-title">Danh Sách Quyền</h3>
 
             <div class="card-tools">
-                <a href="/admin/role/create" class="btn btn-success">Thêm mới</a>
+                <a href="/admin/role/create" class="btn btn-success">Thêm Mới</a>
             </div>
         </div>
         <div class="card-body">
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>STT</th>
                         <th>Tên</th>
-                        <th></th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,14 +45,16 @@
                         var i = 1;
                         foreach (var item in Model)
                         {
-                            <tr>
+                            <tr id="trow_@item.Id">
                                 <td>@i</td>
                                 <td>@item.Name</td>
-                                <td></td>
+                                <td>
+                                    <a href="/admin/role/Edit/@item.Id" class="btn btn-sm btn btn-primary">Sửa</a>
+                                    <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                </td>
                             </tr>
                             i++;
                         }
-
                     }
                 </tbody>
             </table>
@@ -67,3 +69,26 @@
 
 </section>
 <!-- /.content -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                var conf = confirm('Bạn Có Muốn Xóa Bản Ghi Này ?');
+                if (conf == true) {
+                    $.ajax({
+                        url: '/admin/role/delete',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (rs) {
+                            if (rs.success) {
+                                $('#trow_' + id).remove();
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+}

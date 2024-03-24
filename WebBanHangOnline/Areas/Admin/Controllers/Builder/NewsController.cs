@@ -3,34 +3,40 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
 using System.Web.Mvc;
 using WebBanHangOnline.Models;
 using WebBanHangOnline.Models.EF;
 
 namespace WebBanHangOnline.Areas.Admin.Controllers
 {
-    
+
     public class NewsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: Admin/News
-        public ActionResult Index(int? page)
+        public ActionResult Index(string searchText, int? page)
         {
-            int pageSize = 10; // Number of items per page
-            int pageNumber = (page ?? 1);
+            var pageSize = 10;
+            var pageIndex = page ?? 1;
 
-            // Assuming dbContext is your EF context instance
-            var newsItems = db.News.OrderByDescending(n => n.Id);
+            var query = db.News.OrderByDescending(x => x.Id).AsQueryable();
+            var newsQueryBuilder = new NewsQueryBuilder(query)
+                .WithSearchText(searchText);
 
-            // Paginate the news items
-            var pagedNewsItems = newsItems.ToPagedList(pageNumber, pageSize);
+            var items = newsQueryBuilder.Build().ToPagedList(pageIndex, pageSize);
 
-            return View(pagedNewsItems);
+            ViewBag.PageSize = pageSize;
+            ViewBag.Page = pageIndex;
+
+            return View(items);
         }
 
+        // Các hành động khác ở đây...
+    
 
-        public ActionResult Add()
+
+    public ActionResult Add()
         {
             return View();
         }
@@ -42,13 +48,12 @@ namespace WebBanHangOnline.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 model.CreatedDate = DateTime.Now;
-                model.CategoryId = 3;
+                model.CategoryId = 5;
                 model.ModifierDate = DateTime.Now;
                 model.Alias = WebBanHangOnline.Models.Common.Filter.FilterChar(model.Title);
-                db.News.Attach(model);
-                db.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                _ = db.SaveChanges();
-                return RedirectToAction("Index");
+                db.News.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("index");
             }
             return View(model);
         }
